@@ -11,7 +11,7 @@ This contains the working code to setup kubernetes using anisble and vagrant as 
 
 1. Clone repo
 ```bash
-git clone k8s-setup
+git clone https://github.com/naveenrajm7/k8s-setup.git
 ```
 
 2. Execute vagrant inside folder
