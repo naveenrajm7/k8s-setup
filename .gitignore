@@ -8,7 +8,7 @@ Thumbs.db
 .vagrant
 
 # script outputs
-join-command
+playbooks/join-command
 
 # config
 config
