@@ -1,6 +1,8 @@
 # kubernetes setup using ansible and vagrant
 
-This contains the working code to setup kubernetes using anisble and vagrant as shown in [blog](https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/)
+This contains the working code to setup kubernetes using anisble and vagrant.
+
+> adheres to offical documentation : https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
 
 ## Prerequistes
 * Vagrant should be installed on your machine. Installation binaries can be found [here](https://www.vagrantup.com/downloads.html).
@@ -20,20 +22,33 @@ cd k8s-setup
 vagrant up
 ```
 
-3. Access master and nodes
+3. Access master and use kubernetes
 ```bash
 $ ## Accessing master
 $ vagrant ssh k8s-master
 vagrant@k8s-master:~$ kubectl get nodes
-NAME         STATUS   ROLES    AGE   VERSION
-k8s-master   Ready    master   40m   v1.19.4
-node-1       Ready    <none>   36m   v1.19.4
-node-2       Ready    <none>   32m   v1.19.4
+NAME         STATUS   ROLES                  AGE     VERSION
+k8s-master   Ready    control-plane,master   14m     v1.23.3
+node-1       Ready    <none>                 9m37s   v1.23.3
+node-2       Ready    <none>                 5m19s   v1.23.3
 
-$ ## Accessing nodes
-$ vagrant ssh node-1
-$ vagrant ssh node-2
+vagrant@k8s-master:~$ kubectl create ns my-ns
+namespace/my-ns created
 ```
 
 
+### To connect to kuberenetes cluster from outside the cluster.
+
+* Copy ~/.kube/config to host machine  
+https://www.alexkras.com/how-to-copy-one-file-from-vagrant-virtual-machine-to-local-host/
+
+* Make sure the ip address of vagrant VMs are reachable
+https://www.vagrantup.com/docs/networking/private_network.html
+
+* Make sure you are not in a VPN , as this will make VM IPs unreachable.
+
+
+## Reference
+
+* [kubernetes-setup-using-ansible-and-vagrant](https://kubernetes.io/blog/2019/03/15/kubernetes-setup-using-ansible-and-vagrant/)
 
